@@ -13,7 +13,7 @@ public class Post {
 
     Post() {
     }
-
+// Klasa
     public long getId() {
         return id;
     }

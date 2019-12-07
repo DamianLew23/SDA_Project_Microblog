@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: sda.project.microblog.MicroblogApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.946 s - in sda.project.microblog.MicroblogApplicationTests

@@ -1,19 +1,12 @@
-package sda.project.microblog.model;
+package sda.project.microblog.dto;
 
-import javax.persistence.*;
+public class PostDto {
 
-@Entity
-@Table(name = "post")
-public class Post {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_post")
     private long id;
     private String content;
 
-     public Post() {
-    }
-// klasa
+     public PostDto () {}
+
     public long getId() {
         return id;
     }

@@ -10,15 +10,23 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.sql.DataSource;
+
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth)
+
+    @Autowired
+    protected void configure(AuthenticationManagerBuilder auth, DataSource dataSource)
             throws Exception {
         auth
-                .jdbcAuthentication();
+                .jdbcAuthentication()
+                .dataSource(dataSource)
+                .passwordEncoder(passwordEncoder())
+                .usersByUsernameQuery("select login, password, 1 from user where login=?")
+                .authoritiesByUsernameQuery(
+                        "select login as username, 'USER' as role from user where login = ?");
     }
 
     @Override

@@ -2,6 +2,7 @@ package sda.project.microblog.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,9 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -33,10 +37,10 @@ public class UserController {
 
     @PostConstruct
     public void userConstruct(){
-        User user1 = new User("User1","1","Uzytkownik1");
-        User user2 = new User("User2","2","Uzytkownik2");
-        User user3 = new User("User3","3","Uzytkownik3");
-        User user4 = new User("User4","4","Uzytkownik4");
+        User user1 = new User("user1",passwordEncoder.encode("1"),"uzytkownik1");
+        User user2 = new User("user2",passwordEncoder.encode("2"),"uzytkownik2");
+        User user3 = new User("user3",passwordEncoder.encode("3"),"uzytkownik3");
+        User user4 = new User("user4",passwordEncoder.encode("4"),"uzytkownik4");
 
         List <User> userList = new ArrayList<>();
         userList.add(user1);

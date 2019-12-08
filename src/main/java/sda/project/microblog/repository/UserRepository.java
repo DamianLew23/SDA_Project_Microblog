@@ -8,4 +8,5 @@ import sda.project.microblog.model.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
+
 }

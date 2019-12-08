@@ -1,43 +1,27 @@
 package sda.project.microblog.controller;
 
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import sda.project.microblog.model.User;
+import sda.project.microblog.service.UserService;
+
+import javax.validation.Valid;
+
+
+@RestController
 public class UserController {
 
-    private Long id;
-    private String login;
-    private String password;
-    private String UserName;
+    private UserService userService;
 
-    public UserController(){}
-
-    public Long getId() {
-        return id;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @PostMapping("/users")
+    public User addUser(@Valid @RequestBody User user){return userService.addUser(user);}
 
-    public String getLogin() {
-        return login;
-    }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUserName() {
-        return UserName;
-    }
-
-    public void setUserName(String userName) {
-        UserName = userName;
-    }
 }

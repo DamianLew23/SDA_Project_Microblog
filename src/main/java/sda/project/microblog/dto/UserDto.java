@@ -1,37 +1,20 @@
-package sda.project.microblog.model;
+package sda.project.microblog.dto;
 
-import javax.persistence.*;
+public class UserDto {
 
-@Entity
-@Table(name = "user")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_user")
-    private long id;
-
+    private Long id;
     private String login;
     private String password;
     private String userName;
 
-    public User(long id, String login, String password, String userName) {
-        this.id = id;
-        this.login = login;
-        this.password = password;
-        this.userName = userName;
+    public UserDto() {
     }
 
-    public User() {
-
-    }
-
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

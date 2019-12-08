@@ -2,17 +2,22 @@ package sda.project.microblog.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import sda.project.microblog.dto.UserDto;
 import sda.project.microblog.model.User;
 import sda.project.microblog.repository.UserRepository;
 import sda.project.microblog.service.UserService;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,5 +56,11 @@ public class UserController {
         userRepository.saveAll(userList);
     }
 
+    @PostMapping(value = "/user/registration")
+    @ResponseBody
+    ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) throws IOException{
+        UserDto userDtoSaved = userService.addUserDto(userDto);
+        return new ResponseEntity<>(userDto, HttpStatus.CREATED);
+    }
 
 }

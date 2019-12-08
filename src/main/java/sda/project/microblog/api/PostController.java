@@ -3,7 +3,6 @@ package sda.project.microblog.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sda.project.microblog.dto.PostDto;
 import sda.project.microblog.model.Post;
@@ -42,9 +41,9 @@ public class PostController {
         list.add(post3);
         list.add(post4);
 
-       postRepository.saveAll(list);
+        postRepository.saveAll(list);
 
-   }
+    }
 
     @GetMapping(value = "/posts")
     List<PostDto> listAllPost() {
@@ -53,9 +52,8 @@ public class PostController {
 
     @PostMapping("/posts")
     @ResponseBody
-    ResponseEntity<PostDto> addPost (@RequestBody PostDto postDto) throws IOException {
+    ResponseEntity<PostDto> allPost(@RequestBody PostDto postDto) throws IOException {
         PostDto postDtosaved = postService.addPostDto(postDto);
         return new ResponseEntity<>(postDtosaved, HttpStatus.CREATED);
     }
-
 }

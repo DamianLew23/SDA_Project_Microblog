@@ -21,7 +21,6 @@ public class PostConverter {
 
         Post post = new Post();
 
-        post.setId(postDto.getId());
         post.setContent(postDto.getContent());
 
         return post;

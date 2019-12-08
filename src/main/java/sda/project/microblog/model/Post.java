@@ -11,8 +11,8 @@ public class Post {
     private long id;
     private String content;
 
-     public Post() {
-    }
+     public Post() { }
+     public Post (String content) {this.content = content;}
 // klasa
     public long getId() {
         return id;

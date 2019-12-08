@@ -6,6 +6,9 @@ public class PostDto {
     private String content;
 
      public PostDto () {}
+     public PostDto (String content) {
+         this.content = content;
+     }
 
     public long getId() {
         return id;

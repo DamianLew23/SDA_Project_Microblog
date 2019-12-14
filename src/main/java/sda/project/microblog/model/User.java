@@ -10,9 +10,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_user")
     private long id;
-
+    @Column(unique = true)
     private String login;
     private String password;
+    @Column(unique = true)
     private String userName;
 
     public User(String login, String password, String userName) {

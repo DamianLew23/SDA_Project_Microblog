@@ -12,6 +12,7 @@ import sda.project.microblog.dto.UserDtoRegistration;
 import sda.project.microblog.model.User;
 import sda.project.microblog.repository.UserRepository;
 import sda.project.microblog.service.UserService;
+import sda.project.microblog.service.exceptions.DuplicateLoginAndUserNameException;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
@@ -56,9 +57,14 @@ public class UserController {
         userRepository.saveAll(userList);
     }
 
+    @ExceptionHandler({DuplicateLoginAndUserNameException.class})
+    public ResponseEntity handleDuplicateLoginAndUser(DuplicateLoginAndUserNameException e){
+        return new ResponseEntity(e.getMessage(), HttpStatus.IM_USED);
+    }
+
     @PostMapping(value = "/user/registration")
     @ResponseBody
-    ResponseEntity<UserDtoRegistration> addUser(@RequestBody UserDtoRegistration userDtoRegistration) throws IOException {
+    ResponseEntity<UserDtoRegistration> addUser(@RequestBody UserDtoRegistration userDtoRegistration) throws DuplicateLoginAndUserNameException {
         UserDtoRegistration userDtoSaved = userService.addUserDto(userDtoRegistration);
         return new ResponseEntity<>(userDtoSaved, HttpStatus.CREATED);
     }

@@ -5,12 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import sda.project.microblog.dto.UserDto;
+import sda.project.microblog.dto.UserDtoRegistration;
 import sda.project.microblog.model.User;
 import sda.project.microblog.repository.UserRepository;
 import sda.project.microblog.service.UserService;
@@ -38,16 +36,18 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User addUser(@Valid @RequestBody User user){return userService.addUser(user);}
+    public User addUser(@Valid @RequestBody User user) {
+        return userService.addUser(user);
+    }
 
     @PostConstruct
-    public void userConstruct(){
-        User user1 = new User("user1",passwordEncoder.encode("1"),"uzytkownik1");
-        User user2 = new User("user2",passwordEncoder.encode("2"),"uzytkownik2");
-        User user3 = new User("user3",passwordEncoder.encode("3"),"uzytkownik3");
-        User user4 = new User("user4",passwordEncoder.encode("4"),"uzytkownik4");
+    public void userConstruct() {
+        User user1 = new User("user1", passwordEncoder.encode("1"), "uzytkownik1");
+        User user2 = new User("user2", passwordEncoder.encode("2"), "uzytkownik2");
+        User user3 = new User("user3", passwordEncoder.encode("3"), "uzytkownik3");
+        User user4 = new User("user4", passwordEncoder.encode("4"), "uzytkownik4");
 
-        List <User> userList = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
         userList.add(user1);
         userList.add(user2);
         userList.add(user3);
@@ -58,9 +58,13 @@ public class UserController {
 
     @PostMapping(value = "/user/registration")
     @ResponseBody
-    ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) throws IOException{
-        UserDto userDtoSaved = userService.addUserDto(userDto);
-        return new ResponseEntity<>(userDto, HttpStatus.CREATED);
+    ResponseEntity<UserDtoRegistration> addUser(@RequestBody UserDtoRegistration userDtoRegistration) throws IOException {
+        UserDtoRegistration userDtoSaved = userService.addUserDto(userDtoRegistration);
+        return new ResponseEntity<>(userDtoSaved, HttpStatus.CREATED);
     }
+
+
+    @GetMapping(value = "/users")
+    List<UserDto>allUsersList(){return userService.allUsersList();}
 
 }

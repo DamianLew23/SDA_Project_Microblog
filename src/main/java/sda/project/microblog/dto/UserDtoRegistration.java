@@ -1,12 +1,14 @@
 package sda.project.microblog.dto;
 
-public class UserDto {
+public class UserDtoRegistration {
 
     private Long id;
     private String login;
+    private String password;
     private String userName;
 
-    public UserDto() {
+    public UserDtoRegistration(){
+
     }
 
     public Long getId() {
@@ -25,6 +27,14 @@ public class UserDto {
         this.login = login;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -38,7 +48,9 @@ public class UserDto {
         return "UserDto{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
                 ", userName='" + userName + '\'' +
                 '}';
     }
 }
+

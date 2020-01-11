@@ -17,6 +17,7 @@ import sda.project.microblog.service.exceptions.DuplicateLoginAndUserNameExcepti
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,24 +42,9 @@ public class UserController {
         return userService.addUser(user);
     }
 
-    @PostConstruct
-    public void userConstruct() {
-        User user1 = new User("user1", passwordEncoder.encode("1"), "uzytkownik1");
-        User user2 = new User("user2", passwordEncoder.encode("2"), "uzytkownik2");
-        User user3 = new User("user3", passwordEncoder.encode("3"), "uzytkownik3");
-        User user4 = new User("user4", passwordEncoder.encode("4"), "uzytkownik4");
-
-        List<User> userList = new ArrayList<>();
-        userList.add(user1);
-        userList.add(user2);
-        userList.add(user3);
-        userList.add(user4);
-
-        userRepository.saveAll(userList);
-    }
 
     @ExceptionHandler({DuplicateLoginAndUserNameException.class})
-    public ResponseEntity handleDuplicateLoginAndUser(DuplicateLoginAndUserNameException e){
+    public ResponseEntity handleDuplicateLoginAndUser(DuplicateLoginAndUserNameException e) {
         return new ResponseEntity(e.getMessage(), HttpStatus.IM_USED);
     }
 
@@ -71,6 +57,21 @@ public class UserController {
 
 
     @GetMapping(value = "/users")
-    List<UserDto>allUsersList(){return userService.allUsersList();}
+    List<UserDto> allUsersList() {
+        return userService.allUsersList();
+    }
+
+    @GetMapping(value = "/users", params = {"userName"})
+    @ResponseBody
+    public UserDto findUserByUserName(@RequestParam(name = "userName") String userName) {
+        return userService.findUserByUserName(userName);
+    }
+
+    @RequestMapping(value = "/username", method = RequestMethod.GET)
+    @ResponseBody
+    public String currentUserName(Principal principal) {
+        return principal.getName();
+    }
+
 
 }

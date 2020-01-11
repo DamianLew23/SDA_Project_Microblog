@@ -4,11 +4,22 @@ public class PostDto {
 
     private long id;
     private String content;
+    private String userName;
 
-     public PostDto () {}
-     public PostDto (String content) {
-         this.content = content;
-     }
+    public PostDto() {
+    }
+
+    public PostDto(String content) {
+        this.content = content;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public long getId() {
         return id;

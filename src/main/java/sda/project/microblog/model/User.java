@@ -1,6 +1,8 @@
 package sda.project.microblog.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -15,6 +17,11 @@ public class User {
     private String password;
     @Column(unique = true)
     private String userName;
+    @OneToMany(mappedBy = "user")
+    private List<Post>postList = new ArrayList<>();
+
+
+
 
     public User(String login, String password, String userName) {
         this.login = login;
@@ -26,6 +33,13 @@ public class User {
 
     }
 
+    public List<Post> getPostList() {
+        return postList;
+    }
+
+    public void setPostList(List<Post> postList) {
+        this.postList = postList;
+    }
 
     public long getId() {
         return id;

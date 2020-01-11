@@ -10,9 +10,25 @@ public class Post {
     @Column(name = "id_post")
     private long id;
     private String content;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-     public Post() { }
-     public Post (String content) {this.content = content;}
+    public Post() {
+    }
+
+    public Post(String content, User user) {
+        this.content = content;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public long getId() {
         return id;

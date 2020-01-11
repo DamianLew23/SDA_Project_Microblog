@@ -13,6 +13,7 @@ public class PostConverter {
 
         postDto.setId(post.getId());
         postDto.setContent(post.getContent());
+        postDto.setUserName(post.getUser().getUserName());
 
         return postDto;
     }

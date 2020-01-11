@@ -39,7 +39,7 @@ public class UserService {
             User userSaved = userRepository.save(user);
             UserDtoRegistration userDtoSaved = userConverter.convertDaoToDtoRegistration(userSaved);
             return userDtoSaved;
-        } catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
             throw new DuplicateLoginAndUserNameException("Nazwa uzytkownika lub login juz istnieje");
         }
 
@@ -58,6 +58,12 @@ public class UserService {
         return allUsersDtoList;
     }
 
+    public UserDto findUserByUserName(String userName) {
+
+        User user = userRepository.findUserByUserName(userName);
+        UserDto userdto = userConverter.convertDaoToDto(user);
+        return userdto;
+    }
 
 }
 

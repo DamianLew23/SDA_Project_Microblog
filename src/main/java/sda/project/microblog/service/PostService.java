@@ -30,7 +30,6 @@ public class PostService {
 
         return allPostsList
                 .stream()
-                .sorted()
                 .map(x -> postConverter.convertDaoToDto(x))
                 .collect(Collectors.toList());
 

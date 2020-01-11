@@ -1,6 +1,7 @@
 package sda.project.microblog.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import sda.project.microblog.dto.PostDto;
 import sda.project.microblog.model.Post;
@@ -27,19 +28,17 @@ public class PostService {
     public List<PostDto> allPostList() {
         List<Post> allPostsList = postRepository.findAll();
 
-        List<PostDto> allPostDtoList = allPostsList
+        return allPostsList
                 .stream()
+                .sorted()
                 .map(x -> postConverter.convertDaoToDto(x))
                 .collect(Collectors.toList());
 
-        return allPostDtoList;
-
     }
 
-    public PostDto addPostDto(PostDto postDto) throws IOException {
+    public PostDto addPostDto(PostDto postDto) {
         Post post = postConverter.convertDtoToDao(postDto);
         Post postSaved = postRepository.save(post);
-        PostDto postDtoSaved = postConverter.convertDaoToDto(postSaved);
-        return postDtoSaved;
+        return postConverter.convertDaoToDto(postSaved);
     }
 }

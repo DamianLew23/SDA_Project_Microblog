@@ -52,8 +52,8 @@ public class PostController {
 
     @PostMapping("/posts")
     @ResponseBody
-    ResponseEntity<PostDto> allPost(@RequestBody PostDto postDto) throws IOException {
-        PostDto postDtosaved = postService.addPostDto(postDto);
-        return new ResponseEntity<>(postDtosaved, HttpStatus.CREATED);
+    ResponseEntity<PostDto> addPost(@RequestBody PostDto postDto) throws IOException {
+        PostDto postDtoSaved = postService.addPostDto(postDto);
+        return new ResponseEntity<>(postDtoSaved, HttpStatus.CREATED);
     }
 }

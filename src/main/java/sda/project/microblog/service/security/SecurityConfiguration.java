@@ -37,11 +37,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/user/registration").permitAll()
+                .antMatchers("/user/registration","/h2-console").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic();
+                .httpBasic()
+                .and().headers()
+                .frameOptions()
+                .sameOrigin();
     }
 
 
@@ -55,7 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+                registry.addMapping("/**").allowedOrigins("*");
             }
         };
     }
